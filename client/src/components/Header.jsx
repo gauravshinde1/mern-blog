@@ -31,9 +31,9 @@ const Header = () => {
         <Button className="w-12 h-10 hidden sm:inline" color="gray" pill>
           <FaMoon />
         </Button>
-        <Link to={"/sign-up"}>
+        <Link to={path === "/sign-up" ? "/sign-in" : "/sign-up"}>
           <Button gradientDuoTone={"purpleToBlue"} outline>
-            Sign Up
+            {path === "/sign-up" ? "Sign In" : "Sign Up"}
           </Button>
         </Link>
         <Navbar.Toggle />
