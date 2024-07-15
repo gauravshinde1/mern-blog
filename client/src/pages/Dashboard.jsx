@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import DashSidebar from "../components/DashSidebar";
 import DashProfile from "../components/DashProfile";
+import DashPosts from "../components/DashPosts";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const location = useLocation();
+  const { currentUser } = useSelector((state) => state.user);
   const [tab, setTab] = useState("");
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -22,6 +25,7 @@ const Dashboard = () => {
       </div>
       {/* Profile... */}
       {tab === "profile" && <DashProfile />}
+      {tab === "posts" && currentUser.isAdmin && <DashPosts />}
     </div>
   );
 };
