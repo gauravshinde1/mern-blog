@@ -9,7 +9,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { app } from "../firebase";
+import { app } from "../../firebase";
 import {
   updateStart,
   updateSuccess,
@@ -19,7 +19,7 @@ import {
   deleteSuccess,
   signOutFailure,
   signOutSuccess,
-} from "../redux/user/userSlice";
+} from "../../redux/user/userSlice";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 

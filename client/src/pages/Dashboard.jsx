@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import DashSidebar from "../components/DashSidebar";
-import DashProfile from "../components/DashProfile";
-import DashPosts from "../components/DashPosts";
 import { useSelector } from "react-redux";
-import DashUsers from "../components/DashUsers";
+import DashSidebar from "../components/DashboardComponents/DashSidebar";
+import DashProfile from "../components/DashboardComponents/DashProfile";
+import DashPosts from "../components/DashboardComponents/DashPosts";
+import DashUsers from "../components/DashboardComponents/DashUsers";
 
 const Dashboard = () => {
   const location = useLocation();

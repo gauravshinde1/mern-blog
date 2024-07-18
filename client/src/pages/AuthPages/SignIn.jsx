@@ -1,40 +1,46 @@
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import OAuth from "../components/OAuth";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../../redux/user/userSlice";
+import OAuth from "../../components/OAuth";
 
-const SignUp = () => {
-  const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+const SignIn = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
+
+  const [formData, setFormData] = useState({});
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
   const handleSubmit = async (e) => {
+    console.log("Hii");
     e.preventDefault();
-    if (!formData.username || !formData.email || !formData.password) {
-      return setErrorMessage("Please fill out all fields");
+    if (!formData.email || !formData.password) {
+      return dispatch(signInFailure("Please fill out all fields"));
     }
     try {
-      setLoading(true);
-      setErrorMessage(null);
-      const res = await fetch("/api/auth/signup", {
+      dispatch(signInStart());
+      const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
       if (data.success === false) {
-        return setLoading(false), setErrorMessage(data.message);
+        return dispatch(signInFailure(data.message));
       }
       if (res.ok) {
-        navigate("/sign-in");
+        dispatch(signInSuccess(data));
+        navigate("/");
       }
-      setLoading(false);
     } catch (err) {
-      setLoading(false);
-      setErrorMessage(err.message);
+      dispatch(signInFailure(err.message));
     }
   };
 
@@ -57,15 +63,6 @@ const SignUp = () => {
         {/* Right */}
         <div className="flex-1">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <div>
-              <Label value="Your username" />
-              <TextInput
-                type="text"
-                placeholder="Username"
-                id="username"
-                onChange={handleChange}
-              />
-            </div>
             <div>
               <Label value="Your email" />
               <TextInput
@@ -95,15 +92,15 @@ const SignUp = () => {
                   <span className="pl-3">Loading...</span>
                 </>
               ) : (
-                "Sign Up"
+                "Sign In"
               )}
             </Button>
             <OAuth />
           </form>
           <div className="flex gap-2 text-sm mt-5">
-            <span>Have an account?</span>
-            <Link to="/sign-in" className="text-blue-500">
-              Sign In
+            <span>Don't Have an account?</span>
+            <Link to="/sign-up" className="text-blue-500">
+              Sign Up
             </Link>
           </div>
           {errorMessage && (
@@ -117,4 +114,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

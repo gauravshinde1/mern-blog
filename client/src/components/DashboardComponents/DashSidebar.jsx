@@ -7,7 +7,7 @@ import {
   HiDocumentText,
   HiOutlineUserGroup,
 } from "react-icons/hi";
-import { signOutFailure, signOutSuccess } from "../redux/user/userSlice";
+import { signOutFailure, signOutSuccess } from "../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const DashSidebar = () => {

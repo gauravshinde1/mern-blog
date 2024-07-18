@@ -76,7 +76,7 @@ export default function DashUsers() {
   };
 
   return (
-    <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
+    <div className="w-8/12 table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       {currentUser.isAdmin && userRecords?.length > 0 ? (
         <>
           <Table hoverable className="shadow-md">
@@ -90,7 +90,7 @@ export default function DashUsers() {
             </Table.Head>
             {userRecords.map((user) => (
               <Table.Body key={user._id} className="divide-y">
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800 border">
                   <Table.Cell>
                     {new Date(user.createdAt).toLocaleDateString()}
                   </Table.Cell>
@@ -106,9 +106,9 @@ export default function DashUsers() {
                   <Table.Cell>{user.email}</Table.Cell>
                   <Table.Cell>
                     {!user?.isAdmin ? (
-                      <FaTimes className="text-red-500 dark:text-gray-200 mb-4 mx-auto" />
+                      <FaTimes className="text-red-500 dark:text-gray-200 mb-4 mx-auto mt-5" />
                     ) : (
-                      <FaCheck className="text-green-500 dark:text-gray-200 mb-4 mx-auto" />
+                      <FaCheck className="text-green-500 dark:text-gray-200 mb-4 mx-auto mt-5" />
                     )}
                   </Table.Cell>
                   <Table.Cell>

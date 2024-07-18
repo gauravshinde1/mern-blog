@@ -4,8 +4,8 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 import { useSelector, useDispatch } from "react-redux";
-import { toggleTheme } from "../redux/theme/themeSlice";
-import { signOutFailure, signOutSuccess } from "../redux/user/userSlice";
+import { toggleTheme } from "../../redux/theme/themeSlice";
+import { signOutFailure, signOutSuccess } from "../../redux/user/userSlice";
 
 const Header = () => {
   const dispatch = useDispatch();

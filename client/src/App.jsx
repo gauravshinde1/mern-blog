@@ -1,17 +1,18 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
-import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute";
+import PrivateRoute from "./components/RoutesComponents/PrivateRoute";
+import OnlyAdminPrivateRoute from "./components/RoutesComponents/OnlyAdminPrivateRoute";
 import Home from "./pages/Home";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
+import SignIn from "./pages/AuthPages/SignIn";
+import SignUp from "./pages/AuthPages/SignUp";
 import About from "./pages/About";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import CreatePost from "./pages/CreatePost";
-import UpdatePost from "./pages/UpdatePost";
+import Header from "./components/Navigation/Header";
+import Footer from "./components/Navigation/Footer";
+import CreatePost from "./pages/BlogPostPages/CreatePost";
+import UpdatePost from "./pages/BlogPostPages/UpdatePost";
+import PostPage from "./pages/BlogPostPages/PostPage";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/update-post/:postId" element={<UpdatePost />} />
         </Route>
         <Route path="/projects" element={<Projects />} />
+        <Route path="/post/:postSlug" element={<PostPage />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
