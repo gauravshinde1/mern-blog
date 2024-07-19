@@ -57,35 +57,42 @@ export const getPostComments = async (req, res, next) => {
 };
 
 export const deleteComment = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-    return next(errorHandler(403, "You are not allowed to delete this post"));
-  }
   try {
-    await Post.findByIdAndDelete(req.params.postId);
-    res.status(200).json("The post has been deleted");
+    const comment = await Comment.findById(req.params.commentId);
+    if (!comment) {
+      return next(errorHandler(403, "Comment not found"));
+    }
+    if (comment.userId !== req.user.id && !req.user.isAdmin) {
+      return next(
+        errorHandler(403, "You are not allowed to delete this comment")
+      );
+    }
+    await Comment.findByIdAndDelete(req.params.commentId);
+    res.status(200).json("This comment has been deleted");
   } catch (error) {
     next(error);
   }
 };
 
-export const updateComments = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-    return next(errorHandler(403, "You are not allowed to update this post"));
-  }
+export const editComments = async (req, res, next) => {
   try {
-    const updatePost = await Post.findByIdAndUpdate(
-      req.params.postId,
+    const comment = await Comment.findById(req.params.commentId);
+    if (!comment) {
+      return next(errorHandler(403, "Comment not found"));
+    }
+    if (comment.userId !== req.user.id && !req.user.isAdmin) {
+      return next(
+        errorHandler(403, "You are not allowed to edit this comment")
+      );
+    }
+    const editedComment = await Comment.findByIdAndUpdate(
+      req.params.commentId,
       {
-        $set: {
-          title: req.body.title,
-          category: req.body.category,
-          image: req.body.image,
-          content: req.body.content,
-        },
+        content: req.body.content,
       },
       { new: true }
     );
-    res.status(200).json(updatePost);
+    res.status(200).json(editedComment);
   } catch (error) {
     next(error);
   }
