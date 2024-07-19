@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Spinner, Button } from "flowbite-react";
 import CallToAction from "../../components/CallToAction";
-import CommentSection from "../../components/CommentSection";
+import CommentSection from "../../components/CommentComponents/CommentSection";
 
 const PostPage = () => {
   const { postSlug } = useParams();

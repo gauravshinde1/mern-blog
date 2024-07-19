@@ -21,7 +21,7 @@ export const createComment = async (req, res, next) => {
   }
 };
 
-export const getComments = async (req, res, next) => {
+export const getPostComments = async (req, res, next) => {
   try {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9;
