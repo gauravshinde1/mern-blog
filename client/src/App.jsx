@@ -13,10 +13,12 @@ import Footer from "./components/Navigation/Footer";
 import CreatePost from "./pages/BlogPostPages/CreatePost";
 import UpdatePost from "./pages/BlogPostPages/UpdatePost";
 import PostPage from "./pages/BlogPostPages/PostPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
