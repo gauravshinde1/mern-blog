@@ -4,6 +4,7 @@ import { Avatar, Button, Modal, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle, HiX, HiCheck } from "react-icons/hi";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import ScrollToTop from "../ScrollToTop";
 
 export default function DashUsers() {
   const { currentUser } = useSelector((state) => state.user);
@@ -77,6 +78,7 @@ export default function DashUsers() {
 
   return (
     <div className="w-8/12 table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
+      <ScrollToTop />
       {currentUser.isAdmin && userRecords?.length > 0 ? (
         <>
           <Table hoverable className="shadow-md">
